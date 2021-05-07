@@ -1,104 +1,70 @@
-from os import system
+import os
 from sys import platform
 
 
-def check_files():
-    # check to see if the files are in the same location as this
-    pass
+# Connect to SQL here
+class User:
+    """There can be only one user, which holds the name and odometer"""
+    def __init__(self, user_id, name, total_miles=0):
+        self.user_id = user_id
+        self.name = name
+        self.total_miles = total_miles
+
+    def set_odometer(self):
+        # this is where the total_mileage data is collected and set
+        pass
 
 
-def main():
-    selection = ''
-    choices = [['R', 'Rides'], ['S', 'Statistics'], ['L', 'Locations'], ['A', 'About/Settings'], ['Q', 'Quit']]
-    while selection.upper() != 'Q':
-        selection = formatted_menu('CYCLETRAK', choices)
-        if selection.upper() == 'R':
-            rides()
-        elif selection.upper() == 'S':
-            statistics()
-        elif selection.upper() == 'L':
-            locations()
-        elif selection.upper() == 'A':
-            about()
-        elif selection.upper() == 'Q':
-            pass
-        else:
-            input('ERROR: ENTER A VALID RESPONSE. Press enter to continue.')
+class Ride:
+    """Ride logs an individual ride and collects info from that ride"""
+    def __init__(self, ride_id, name, bike, location, date, time, duration, distance, odometer):
+        self.ride_id = ride_id
+        self.name = name
+        self.bike = bike
+        self.location = location
+        self.date = date
+        self.time = time
+        self.duration = duration
+        self.distance = distance
+        self.odometer = odometer
 
 
-def rides():
-    selection = ''
-    choices = [['N', 'Log New Ride'], ['V', 'View/Edit Rides'], ['B', 'Back']]
-    while selection.upper() != 'B':
-        selection = formatted_menu('RIDES', choices)
-        if selection.upper() == 'N':
-            pass
-        elif selection.upper() == 'V':
-            pass
-        elif selection.upper() == 'B':
-            pass
-        else:
-            input('ERROR: ENTER A VALID RESPONSE. Press enter to continue.')
+class Bike:
+    """Each individual bike a user can own"""
+    def __init__(self, bike_id, type, year, make, model, date_bought, date_retired, odometer):
+        self.bike_id = bike_id
+        self.type = type
+        self.year= year
+        self.make = make
+        self.model = model
+        self.date_bought = date_bought
+        self.date_retired = date_retired
+        self.odometer = odometer
+
+    def set_odometer(self):
+        # this is the total_mileage data is collected and set for the bike
+        pass
 
 
-def statistics():
-    selection = ''
-    choices = [['W', 'Week view'], ['M', 'Month view'], ['Y', 'Year view'], ['A', 'All-time view'], ['B', 'Back']]
-    while selection.upper() != 'B':
-        selection = formatted_menu('STATISTICS', choices)
-        if selection.upper() == 'W':
-            pass
-        elif selection.upper() == 'M':
-            pass
-        elif selection.upper() == 'Y':
-            pass
-        elif selection.upper() == 'A':
-            pass
-        elif selection.upper() == 'B':
-            pass
-        else:
-            input('ERROR: ENTER A VALID RESPONSE. Press enter to continue.')
+class Location:
+    """Each location has distance and terrain type"""
+    def __init__(self, location_id, name, city, distance, terrain):
+        self.location_id = location_id
+        self.name = name
+        self.city = city
+        self.distance = distance
+        self.terrain = terrain
 
 
-def locations():
-    selection = ''
-    choices = [['N', 'New location'], ['V', 'View/edit locations'], ['P', 'Print locations'], ['B', 'Back']]
-    while selection.upper() != 'B':
-        selection = formatted_menu('STATISTICS', choices)
-        if selection.upper() == 'N':
-            pass
-        elif selection.upper() == 'V':
-            pass
-        elif selection.upper() == 'P':
-            pass
-        elif selection.upper() == 'B':
-            pass
-        else:
-            input('ERROR: ENTER A VALID RESPONSE. Press enter to continue.')
-
-
-def about():
-    selection = ''
-    choices = [['A', 'About'], ['U', 'User Information'], ['G', 'Set/Edit Goals'], ['B', 'Back']]
-    while selection.upper() != 'B':
-        selection = formatted_menu('STATISTICS', choices)
-        if selection.upper() == 'A':
-            pass
-        elif selection.upper() == 'U':
-            pass
-        elif selection.upper() == 'G':
-            pass
-        elif selection.upper() == 'B':
-            pass
-        else:
-            input('ERROR: ENTER A VALID RESPONSE. Press enter to continue.')
+def wrong_answer():
+    input('ERROR: ENTER A VALID RESPONSE. Press enter to continue.')
 
 
 def clear_terminal():
     if platform == 'linux' or platform == 'linux2' or platform == 'darwin':
-        system('clear')
+        os.system('clear')
     elif platform == 'win32':
-        system('cls')
+        os.system('cls')
 
 
 def intro_page():
@@ -162,11 +128,75 @@ def formatted_menu(title, contents):
     return input('Enter selection: ')
 
 
-def input_menu(title, contents):
-    print(title)
-    print(contents)
+def user_menu():
+    choice = ' '
+    while choice.upper() != 'B':
+        clear_terminal()
+        user_name = 'Christian Hall' # get this from SQL
+        total_mileage = 29.2 # get this from SQL
+        print('********************************** USER MENU ***********************************')
+        print('* Name:          ' + user_name + ' ' * (79 - 17 - len(user_name)) + '*')
+        print('* Total Mileage: ' + str(total_mileage) + ' ' * (79 - 17 - len(str(total_mileage))) + '*')
+        print('*' + ' ' * 78 + '*')
+        print('* E - Edit User Name                                                           *')
+        print('* B - Back                                                                     *')
+        print('********************************************************************************')
+        choice = input('Enter selection: ')
+        if choice.upper() == 'E':
+            # edit_user_name()
+            pass
+        elif choice.upper() == 'B':
+            pass
+        else:
+            wrong_answer()
+
+
+def rides_menu():
+    selection = ''
+    choices = [['N', 'New ride'], ['R', 'View rides'], ['S', 'View statistics'],['B', 'Back']]
+    while selection.upper() != 'Q':
+        selection = formatted_menu('RIDES MENU', choices)
+        if selection.upper() == 'N':
+            # new_ride_menu()
+            pass
+        elif selection.upper() == 'V':
+            # view_rides_menu()
+            pass
+        elif selection.upper() == 'S':
+            # view_statistics_menu()
+            pass
+        elif selection.upper() == 'B':
+            pass
+        else:
+            wrong_answer()
+
+
+def main_menu():
+    selection = ''
+    choices = [['U', 'User Data'], ['R', 'Rides'], ['C', 'Cycles'], ['L', 'Locations'], ['S', 'Settings'], ['Q', 'Quit']]
+    while selection.upper() != 'Q':
+        selection = formatted_menu('CYCLETRAK', choices)
+        if selection.upper() == 'U':
+            user_menu()
+        elif selection.upper() == 'R':
+            # rides_menu()
+            pass
+        elif selection.upper() == 'B':
+            # cycle_menu()
+            pass
+        elif selection.upper() == 'L':
+            # location_menu()
+            pass
+        elif selection.upper() == 'S':
+            # settings_menu()
+            pass
+        elif selection.upper() == 'Q':
+            pass
+        else:
+            wrong_answer()
 
 
 intro_page()
-main()
+# check for existing user
+main_menu()
 exit_page()
