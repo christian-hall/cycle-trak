@@ -1,6 +1,8 @@
 import os
 from sys import platform
-width = 80
+
+terminal_size = os.get_terminal_size()
+width = terminal_size[0]
 
 
 def wrong_answer():
@@ -16,15 +18,16 @@ def clear_terminal():
 
 def intro_page():
     clear_terminal()
-    print('********************* CYCLETRAK *********************')
+    print('CYCLETRAK')
+    print('BY CHRISTIAN HALL')
+    print('VERSION 1.0')
     print('')
     print(' o__         __o        ,__o        __o           __o')
     print(' ,>/_       -\<,      _-\\_<,       _`\\<,_       _ \\<_')
     print("(*)`(*).....O/ O.....(*)/'(*).....(*)/ (*).....(_)/(_)")
     print()
-    print('BY CHRISTIAN HALL                         VERSION 1.0')
     print('')
-    input('           press ENTER to continue to app')
+    input('press ENTER to continue to app')
 
 
 def exit_page():
@@ -50,7 +53,31 @@ def exit_page():
     print('       "*==*""                             ^"*==*""')
     print('')
     print('')
-    input('press ENTER to exit')
+    input('press ENTER to proceed')
+    clear_terminal()
+
+
+def error_page():
+    clear_terminal()
+    print('ERROR - unable to connect to SQL database.')
+    print('Please troubleshoot the issue and try again.')
+    print('')
+    print('                                          $"   *.      ')
+    print('              d$$$$$$$P"                  $    J')
+    print('                  ^$.                     4r  "')
+    print('                  d"b                    .db')
+    print('                 P   $                  e" $')
+    print('        ..ec.. ."     *.              zP   $.zec..')
+    print('    .^        3*b.     *.           .P" .@"4F      "4')
+    print('  ."         d"  ^b.    *c        .$"  d"   $         %')
+    print(' /          P      $.    "c      d"   @     3r         3')
+    print('4        .eE........$r===e$$$$eeP    J       *..        b')
+    print('$       $$$$$       $   4$$$$$$$     F       d$$$.      4')
+    print('$       $$$$$       $   4$$$$$$$     L       *$$$"      4')
+    print('4         "      ""3P ===$$$$$$"     3                  P')
+    print(' *                 $       """        b                J')
+    print(' C================D                   C===============D')
+    input('press ENTER to proceed')
     clear_terminal()
 
 
@@ -70,7 +97,7 @@ def formatted_choices(menu, contents):
     return menu
 
 
-def formatted_stats(menu, stats):
+def formatted_stats(menu, stats, choices):
     """will show stats in a way that matches menu formatting"""
     pass
 
