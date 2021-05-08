@@ -96,10 +96,20 @@ def formatted_choices(menu, contents):
         menu.append(f'* {item[0]} - {item[1]}' + ' ' * int(width - 6 - len(item[0]) - len(item[1])) + '*')
     return menu
 
-
-def formatted_stats(menu, stats, choices):
-    """will show stats in a way that matches menu formatting"""
+def formatted_stats(menu, stats):
     pass
+
+
+def stats_menu(title, stats, choices):
+    clear_terminal()
+    menu = [formatted_title(title)]
+    # menu = formatted_stats(menu, stats)
+    menu.append(' ')
+    menu = formatted_choices(menu, choices)
+    menu.append('*' * width)
+    for line in menu:
+        print(line)
+    return input('Enter selection: ')
 
 
 def choice_menu(title, contents):

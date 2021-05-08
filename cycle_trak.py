@@ -5,8 +5,6 @@ import location
 import ride
 from printing import choice_menu, wrong_answer, intro_page, exit_page, error_page
 
-
-
 def main_menu():
     selection = ''
     choices = [['U', 'User Data'], ['R', 'Rides'], ['C', 'Cycles'],
@@ -14,7 +12,7 @@ def main_menu():
     while selection.upper() != 'Q':
         selection = choice_menu('CYCLETRAK', choices)
         if selection.upper() == 'U':
-            user_menu()
+            user.user_menu()
         elif selection.upper() == 'R':
             # rides_menu()
             pass
@@ -31,12 +29,9 @@ def main_menu():
             pass
         else:
             wrong_answer()
-    
 
-def user_menu():
-    pass
 
-if database.connect_to_database:
+if database.connected:
     # check for new user and generate if needed
     intro_page()
     main_menu()
